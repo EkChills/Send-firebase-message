@@ -7,7 +7,7 @@ const body =  {
 }
 
 export default async function page() {
-  const res = await fetch('/api/sendtopic', {
+  const res = await fetch('https://send-firebase-message.vercel.app/api/sendtopic', {
     method:'POST',
     body:body as any
   })
