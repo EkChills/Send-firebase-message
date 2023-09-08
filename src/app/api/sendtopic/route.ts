@@ -1,6 +1,7 @@
 import {applicationDefault, initializeApp, refreshToken} from 'firebase-admin/app'
 import { Message, getMessaging } from 'firebase-admin/messaging';
 import { NextRequest, NextResponse } from 'next/server';
+import {v4 as uuid} from 'uuid'
 
 type MessageType = {
   connectionCode:string;
@@ -29,13 +30,13 @@ export async function POST(req:NextRequest) {
       projectId:'attendance-mgmt-kwasu',
       credential: applicationDefault(),
       // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
-  });
+  }, 'fb-msg'+uuid());
   const res = await getMessaging().send(message)
   console.log('Successfully sent message:', res);
   return NextResponse.json({msg:'success'})
     
   } catch (error) {
-    console.log('Error sending message:', error);
+    console.log(JSON.stringify(error), error);
   }
 
 }
