@@ -7,12 +7,12 @@ const body =  {
 }
 
 export default async function page() {
-  // const res = await fetch('/api/sendtopic', {
-  //   method:'POST',
-  //   body:body as any
-  // })
-  // const data = await res.json()
-  // console.log(data);
+  const res = await fetch('/api/sendtopic', {
+    method:'POST',
+    body:body as any
+  })
+  const data = await res.json()
+  console.log(data);
   
   return (
     <div>page</div>

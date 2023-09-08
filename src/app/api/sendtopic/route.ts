@@ -37,6 +37,7 @@ export async function POST(req:NextRequest) {
     
   } catch (error) {
     console.log(JSON.stringify(error), error);
+    return new NextResponse(JSON.stringify(error), {status:500})
   }
 
 }
