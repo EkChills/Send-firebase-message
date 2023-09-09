@@ -12,6 +12,7 @@ type MessageType = {
 export async function POST(req:NextRequest) {
   try {
     const {connectionCode, courseCode, topic}:MessageType = await req.json()
+    const serviceAccount = require('../../../../service-account.json')
 
     if(!connectionCode || !courseCode) {
       return new NextResponse('bad request', {status:400})
@@ -26,9 +27,9 @@ export async function POST(req:NextRequest) {
     };
   
     // const app = initializeApp({projectId:'attendance-mgmt-kwasu', credential:refreshToken('AIzaSyCza-5FM9SQlM70vPDBd-cNSil6H6EaGvE')})
-    initializeApp({
+    await initializeApp({
       projectId:'attendance-mgmt-kwasu',
-      credential: applicationDefault(),
+      credential: serviceAccount,
       // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
   }, 'fb-msg'+uuid());
   const res = await getMessaging().send(message)
