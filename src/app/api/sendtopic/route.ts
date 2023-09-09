@@ -14,6 +14,7 @@ type MessageType = {
 }
 
 export async function POST(req:NextRequest) {
+  process.env.GOOGLE_APPLICATION_CREDENTIALS 
   const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
   const servAct = require('../../../../service-account.json')
   const app = initializeApp({
