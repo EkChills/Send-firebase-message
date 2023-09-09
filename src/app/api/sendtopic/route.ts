@@ -10,14 +10,18 @@ type MessageType = {
   connectionCode:string;
   courseCode:string;
   topic:string;
+  appName:string;
 }
 
 export async function POST(req:NextRequest) {
+  const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
   const servAct = require('../../../../service-account.json')
-  initializeApp({
+  const app = initializeApp({
     projectId:'attendance-mgmt-kwasu',
-    credential: applicationDefault(),
-  }, `damn${uuid()}`)
+    credential: admin.credential.cert(servAct),
+  }, appName)
+  console.log(app);
+  
   try {
     // initializeApp({
     //   projectId:'attendance-mgmt-kwasu',
@@ -25,7 +29,6 @@ export async function POST(req:NextRequest) {
     //   // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
     // }, 'fb-msg'+uuid());
   
-    const {connectionCode, courseCode, topic}:MessageType = await req.json()
     
     if(!connectionCode || !courseCode) {
       return new NextResponse('bad request', {status:400})
@@ -40,13 +43,10 @@ export async function POST(req:NextRequest) {
     };
 
     // const app = initializeApp({projectId:'attendance-mgmt-kwasu', credential:refreshToken('AIzaSyCza-5FM9SQlM70vPDBd-cNSil6H6EaGvE')})
-    if(initializeApp()) {
-      console.log('yay');
-      const res = await getMessaging().send(message)
-      console.log('Successfully sent message:', res);
-      return NextResponse.json({msg:'success'})
-      
-    }
+    
+  const res = await getMessaging().send(message)
+  console.log('Successfully sent message:', res);
+  return NextResponse.json({msg:'success'})
     
   } catch (error) {
     console.log(JSON.stringify(error), error);
