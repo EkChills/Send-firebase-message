@@ -50,7 +50,7 @@ export async function POST(req:NextRequest) {
   const res = await getMessaging().send(message)
   console.log('Successfully sent message:', res);
   admin.app().delete()
-  return NextResponse.json({msg:'success'})
+  return NextResponse.json({msg:`successfully sent to ${res}`})
     
   } catch (error) {
     console.log(JSON.stringify(error), error);
