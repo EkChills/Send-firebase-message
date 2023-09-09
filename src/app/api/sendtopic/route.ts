@@ -11,19 +11,19 @@ type MessageType = {
   courseCode:string;
   topic:string;
 }
+
 export async function POST(req:NextRequest) {
+  const servAct = require('../../../../service-account.json')
+  initializeApp({
+    projectId:'attendance-mgmt-kwasu',
+    credential: admin.credential.cert(servAct),
+  }, uuid())
   try {
     // initializeApp({
     //   projectId:'attendance-mgmt-kwasu',
     //   credential: applicationDefault(),
     //   // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
     // }, 'fb-msg'+uuid());
-    const servAct = require('../../../../service-account.json')
-    initializeApp({
-      projectId:'attendance-mgmt-kwasu',
-      credential: admin.credential.cert(servAct),
-    }, uuid())
-    
   
     const {connectionCode, courseCode, topic}:MessageType = await req.json()
     
