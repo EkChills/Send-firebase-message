@@ -40,9 +40,13 @@ export async function POST(req:NextRequest) {
     };
 
     // const app = initializeApp({projectId:'attendance-mgmt-kwasu', credential:refreshToken('AIzaSyCza-5FM9SQlM70vPDBd-cNSil6H6EaGvE')})
-  const res = await getMessaging().send(message)
-  console.log('Successfully sent message:', res);
-  return NextResponse.json({msg:'success'})
+    if(initializeApp()) {
+      console.log('yay');
+      const res = await getMessaging().send(message)
+      console.log('Successfully sent message:', res);
+      return NextResponse.json({msg:'success'})
+      
+    }
     
   } catch (error) {
     console.log(JSON.stringify(error), error);
