@@ -24,14 +24,7 @@ export default  function Home() {
   // const data = await res.json()
   // console.log(data);
 
-  React.useEffect(() => {
-    const app = initializeApp({
-      projectId:'attendance-mgmt-kwasu',
-      credential: admin.credential.cert(servAct as any),
-    }, uuid())
-    console.log(app);
-    
-  },[])
+
   
   return (
     <div>page</div>
