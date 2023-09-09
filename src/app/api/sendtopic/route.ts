@@ -15,6 +15,7 @@ type MessageType = {
 }
 export async function POST(req:NextRequest) {
   // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);\
+  initializeApp()
   if(!initializeApp({}, uuid())){
     const app = admin.initializeApp({
       projectId:'attendance-mgmt-kwasu',
