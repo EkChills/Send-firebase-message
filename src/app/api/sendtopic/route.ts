@@ -16,8 +16,8 @@ export async function POST(req:NextRequest) {
   const servAct = require('../../../../service-account.json')
   initializeApp({
     projectId:'attendance-mgmt-kwasu',
-    credential: admin.credential.cert(servAct),
-  }, uuid())
+    credential: applicationDefault(),
+  }, `damn${uuid()}`)
   try {
     // initializeApp({
     //   projectId:'attendance-mgmt-kwasu',
