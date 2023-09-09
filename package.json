@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "$env:GOOGLE_APPLICATION_CREDENTIALS=/service-account.json && next build",
     "start": "next start",
     "lint": "next lint"
   },
