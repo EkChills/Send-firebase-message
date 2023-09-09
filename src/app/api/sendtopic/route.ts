@@ -15,15 +15,14 @@ type MessageType = {
 
 export async function POST(req:NextRequest) {
   // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);
-  admin.initializeApp()
-  const appId = uuid()
+  initializeApp()
   process.env.GOOGLE_APPLICATION_CREDENTIALS 
   const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
   const servAct = require('../../../../service-account.json')
   const app = admin.initializeApp({
     projectId:'attendance-mgmt-kwasu',
     credential: admin.credential.cert(servAct),
-  }, appId)
+  }, appName+uuid())
   console.log(app);
   
   try {
@@ -51,9 +50,9 @@ export async function POST(req:NextRequest) {
   const res = await getMessaging().send(message)
   console.log('Successfully sent message:', res);
   admin.app().delete()
-  return NextResponse.json({msg:`successfully sent to ${res}`})
+  return NextResponse.json({msg:'success'})
     
-  } catch (error) { 
+  } catch (error) {
     console.log(JSON.stringify(error), error);
     return new NextResponse(JSON.stringify(error), {status:500})
   }
