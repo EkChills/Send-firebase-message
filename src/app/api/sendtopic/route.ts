@@ -3,7 +3,6 @@ import { Message, getMessaging } from 'firebase-admin/messaging';
 import { NextRequest, NextResponse } from 'next/server';
 import admin from 'firebase-admin'
 import {v4 as uuid} from 'uuid'
-import servAct from '../../../../service-account.json'
 
 
 
@@ -16,14 +15,14 @@ type MessageType = {
 
 export async function POST(req:NextRequest) {
   // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);
-  // admin.initializeApp()
-  const app = admin.initializeApp({
-    projectId:'attendance-mgmt-kwasu',
-    credential: admin.credential.cert(servAct as any),
-  }, 'damn'+uuid())
+  admin.initializeApp()
   process.env.GOOGLE_APPLICATION_CREDENTIALS 
   const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
-  // const servAct = require('../../../../service-account.json')
+  const servAct = require('../../../../service-account.json')
+  const app = admin.initializeApp({
+    projectId:'attendance-mgmt-kwasu',
+    credential: admin.credential.cert(servAct),
+  }, appName+uuid())
   console.log(app);
   
   try {
