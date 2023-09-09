@@ -1,4 +1,4 @@
-{
+export const servAct = {
   "type": "service_account",
   "project_id": "attendance-mgmt-kwasu",
   "private_key_id": "ff6c192098e325256d336bb56a37f9dc9c85d12c",

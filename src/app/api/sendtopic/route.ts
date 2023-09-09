@@ -29,7 +29,7 @@ export async function POST(req:NextRequest) {
     // const app = initializeApp({projectId:'attendance-mgmt-kwasu', credential:refreshToken('AIzaSyCza-5FM9SQlM70vPDBd-cNSil6H6EaGvE')})
     await initializeApp({
       projectId:'attendance-mgmt-kwasu',
-      credential: serviceAccount,
+      credential: applicationDefault(),
       // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
   }, 'fb-msg'+uuid());
   const res = await getMessaging().send(message)
