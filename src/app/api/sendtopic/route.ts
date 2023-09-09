@@ -15,7 +15,7 @@ type MessageType = {
 
 export async function POST(req:NextRequest) {
   // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);
-  initializeApp()
+  // admin.initializeApp()
   process.env.GOOGLE_APPLICATION_CREDENTIALS 
   const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
   const servAct = require('../../../../service-account.json')
@@ -49,12 +49,13 @@ export async function POST(req:NextRequest) {
     
   const res = await getMessaging().send(message)
   console.log('Successfully sent message:', res);
-  admin.app().delete()
   return NextResponse.json({msg:'success'})
     
   } catch (error) {
     console.log(JSON.stringify(error), error);
     return new NextResponse(JSON.stringify(error), {status:500})
+  } finally{
+    
   }
 
 }
