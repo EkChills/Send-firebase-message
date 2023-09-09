@@ -8,7 +8,6 @@ type MessageType = {
   courseCode:string;
   topic:string;
 }
-
 export async function POST(req:NextRequest) {
   try {
     const {connectionCode, courseCode, topic}:MessageType = await req.json()
