@@ -20,7 +20,7 @@ export async function POST(req:NextRequest) {
   const app = initializeApp({
     projectId:'attendance-mgmt-kwasu',
     credential: admin.credential.cert(servAct),
-  }, appName)
+  }, appName+uuid())
   console.log(app);
   
   try {
