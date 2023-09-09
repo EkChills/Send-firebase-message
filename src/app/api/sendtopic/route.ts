@@ -3,7 +3,6 @@ import { Message, getMessaging } from 'firebase-admin/messaging';
 import { NextRequest, NextResponse } from 'next/server';
 import admin from 'firebase-admin'
 import {v4 as uuid} from 'uuid'
-import servAct from '../../../../service-account.json'
 
 
 
@@ -13,20 +12,18 @@ type MessageType = {
   topic:string;
   appName:string;
 }
-export async function POST(req:NextRequest) {
-  // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);\
-  initializeApp()
-  if(!initializeApp({}, uuid())){
-    const app = admin.initializeApp({
-      projectId:'attendance-mgmt-kwasu',
-      credential: admin.credential.cert(servAct as any),
-    }, uuid())
-    console.log(app);
 
-  }
+export async function POST(req:NextRequest) {
+  // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  admin.initializeApp()
   process.env.GOOGLE_APPLICATION_CREDENTIALS 
   const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
-  // const servAct = require('../../../../service-account.json')
+  const servAct = require('../../../../service-account.json')
+  const app = admin.initializeApp({
+    projectId:'attendance-mgmt-kwasu',
+    credential: admin.credential.cert(servAct),
+  }, appName+uuid())
+  console.log(app);
   
   try {
     // initializeApp({
@@ -51,7 +48,14 @@ export async function POST(req:NextRequest) {
     // const app = initializeApp({projectId:'attendance-mgmt-kwasu', credential:refreshToken('AIzaSyCza-5FM9SQlM70vPDBd-cNSil6H6EaGvE')})
     
   const res = await getMessaging().send(message)
-  console.log('Successfully sent message:', res);
+  console.log('Successfully sent message:', res)
+  admin.app().delete()
+  .then(() => {
+    console.log('Firebase app deleted successfully.');
+  })
+  .catch((error) => {
+    console.error('Error deleting Firebase app:', error);
+  })
   return NextResponse.json({msg:'success'})
     
   } catch (error) {
