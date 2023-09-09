@@ -32,7 +32,7 @@ export async function POST(req:NextRequest) {
     const serv = servAct
     await initializeApp({
       projectId:'attendance-mgmt-kwasu',
-      credential: admin.credential.cert(JSON.stringify(serviceAct)),
+      credential: admin.credential.cert(JSON.parse(serviceAct as any)),
       // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
     }, 'fb-msg'+uuid());
 
