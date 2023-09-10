@@ -32,7 +32,6 @@ export async function POST(req:NextRequest) {
     //   // databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
     // }, 'fb-msg'+uuid());
   
-    
     if(!connectionCode || !courseCode) {
       return new NextResponse('bad request', {status:400})
     }
