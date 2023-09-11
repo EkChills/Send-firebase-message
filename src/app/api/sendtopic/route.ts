@@ -14,16 +14,16 @@ type MessageType = {
 }
 
 export async function POST(req:NextRequest) {
-  // console.log(  process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  console.log( process.env.SERVICE_ACCOUNT_DETAILS);
   admin.initializeApp()
   process.env.GOOGLE_APPLICATION_CREDENTIALS 
   const {connectionCode, courseCode, topic, appName}:MessageType = await req.json()
-  const servAct = require('../../../../service-account.json')
+  // const servAct = require('../../../../service-account.json')
   const app = admin.initializeApp({
     projectId:'attendance-mgmt-kwasu',
-    credential: applicationDefault(),
+    credential: admin.credential.cert(JSON.parse(process.env.SERVICE_ACCOUNT_DETAILS!) as admin.ServiceAccount),
   }, uuid() + uuid())
-  console.log(app);
+  // console.log(app);
   
   try {
     // initializeApp({
