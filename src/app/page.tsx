@@ -3,7 +3,6 @@
 import React from 'react'
 import {initializeApp} from 'firebase-admin/app'
 import admin from 'firebase-admin'
-import servAct from  '../../service-account.json'
 import {v4 as uuid} from 'uuid'
 
 
