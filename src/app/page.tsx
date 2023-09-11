@@ -1,4 +1,4 @@
-"use client"
+
 
 import React from 'react'
 import {initializeApp} from 'firebase-admin/app'
@@ -16,14 +16,14 @@ const body =  {
 
 
 
-export default  function Home() {
-  // const res = await fetch('https://send-firebase-message.vercel.app/api/sendtopic', {
-  //   method:'POST',
-  //   body:body as any
-  // })
-  // const data = await res.json()
-  // console.log(data);
-
+export default async function Home() {
+  const res = await fetch('http://localhost:3000/api/sendtopic', {
+    method:'POST',
+    body:body as any
+  })
+  console.log(res);
+  await res.json()
+  
 
   
   return (
