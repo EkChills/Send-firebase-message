@@ -17,12 +17,12 @@ const body =  {
 
 
 export default async function Home() {
-  const res = await fetch('http://localhost:3000/api/sendtopic', {
-    method:'POST',
-    body:body as any
-  })
-  console.log(res);
-  await res.json()
+  // const res = await fetch('http://localhost:3000/api/sendtopic', {
+  //   method:'POST',
+  //   body:body as any
+  // })
+  // console.log(res);
+  // await res.json()
   
 
   
